@@ -1,0 +1,34 @@
+[project]
+name = "supradim-ai-honeypot"
+version = "0.1.0"
+description = "Supradim AI Honeypot: evidence-first Web, API, and MCP deception for autonomous AI agents"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+dependencies = [
+  "fastapi>=0.115,<1",
+  "httpcore[socks]>=1.0.9",
+  "httpx[socks]>=0.28.1",
+  "uvicorn[standard]>=0.32,<1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "httpx>=0.27,<1",
+  "pytest>=8.3,<9",
+]
+
+[project.scripts]
+supradim-ai-honeypot = "agent_honeypot.app:run"
+agent-honeypot = "agent_honeypot.app:run"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agent_honeypot"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
